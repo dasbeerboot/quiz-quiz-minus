@@ -10,6 +10,7 @@ function First(): JSX.Element {
     })
       .then((response) => {
         const data = response.data.results[0]
+        console.log(data)
         console.log('question', data.question)
         console.log('choices', data.correct_answer, data.incorrect_answers)
       })
