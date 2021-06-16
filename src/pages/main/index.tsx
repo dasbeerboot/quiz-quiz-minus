@@ -1,8 +1,13 @@
 import React from 'react'
 import './index.scss'
+import First from '../quiz/First'
 
 function MainPage(): JSX.Element {
-  return <div className="main-page-container">메인페이지 컨텐츠</div>
+  return (
+    <div className="main-page-container">
+      <First />
+    </div>
+  )
 }
 
 export default MainPage
