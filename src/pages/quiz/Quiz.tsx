@@ -2,6 +2,7 @@ import React from 'react'
 import { IQuiz } from '../../models/quiz'
 import AnswerContainer from '../../components/AnswerContainer'
 import { useRouteMatch } from 'react-router-dom'
+import Button from '../../components/Button'
 
 export interface QuizIProps {
   quiz: IQuiz | undefined
@@ -11,12 +12,18 @@ export interface QuizIProps {
   onGoNextPage: () => void
 }
 
-function Quiz({ quiz, isLoading, onSelectAnswer, onGoNextPage }: QuizIProps): JSX.Element {
+function Quiz({
+  quiz,
+  isSelected,
+  isLoading,
+  onSelectAnswer,
+  onGoNextPage,
+}: QuizIProps): JSX.Element {
   const match = useRouteMatch<{ index: string }>()
 
   if (!quiz) return <div></div>
   return (
-    <article>
+    <article className="quiz-container">
       <div className="quiz-title">
         <h2>
           <div dangerouslySetInnerHTML={{ __html: quiz.question }}></div>
@@ -25,11 +32,12 @@ function Quiz({ quiz, isLoading, onSelectAnswer, onGoNextPage }: QuizIProps): JS
       <div className="quiz-content">
         <AnswerContainer
           answers={quiz.answers}
+          isSelected={isSelected}
           onChangeAnswer={(index: number, answer: string) => onSelectAnswer(index, answer)}
         />
-        <button onClick={onGoNextPage} disabled={isLoading}>
+        <Button onClick={onGoNextPage} disabled={isLoading}>
           {match.params.index !== '4' ? 'next' : 'view result'}
-        </button>
+        </Button>
       </div>
     </article>
   )

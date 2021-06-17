@@ -6,9 +6,9 @@ import config from '../../configs/config'
 import { IQuiz } from '../../models/quiz'
 import { useHistory } from 'react-router'
 import { useRouteMatch } from 'react-router-dom'
-import ResultPage from '../result/result'
-import NicknameModal from '../../components/NicknameModal'
-import { Backdrop, CircularProgress, Dialog } from '@material-ui/core'
+import { Backdrop, CircularProgress } from '@material-ui/core'
+import ResultPage from '../result/Result'
+import Button from '../../components/Button'
 
 function MainPage(): JSX.Element {
   const match = useRouteMatch<{ index: string }>()
@@ -25,15 +25,6 @@ function MainPage(): JSX.Element {
   const [result, setResult] = useState<boolean[]>([])
   const [correctAnswer, setCorrectAnswer] = useState('')
   const [isSelected, setIsSelected] = useState({ selected: false, index: 0 })
-
-  // const renderLoading = useMemo(() => {
-  //   if (isLoading)
-  //     return (
-  //       <Dialog open={isLoading} onClose={() => console.log('for loading')}>
-  //         <CircularProgress />
-  //       </Dialog>
-  //     )
-  // }, [isLoading])
 
   const getQuiz = async () => {
     axios({
@@ -62,7 +53,6 @@ function MainPage(): JSX.Element {
   }
 
   const handleChangeAnswer = (index: number, selectedAnswer: string) => {
-    console.log(index)
     const arr = result
     if (result === []) {
       arr.push(correctAnswer === selectedAnswer)
@@ -70,6 +60,7 @@ function MainPage(): JSX.Element {
       arr[index] = correctAnswer === selectedAnswer
     }
     setResult(arr)
+    setIsSelected({ selected: true, index: index })
   }
 
   const goNextPage = () => {
@@ -115,9 +106,9 @@ function MainPage(): JSX.Element {
           isLoading={isLoading}
         />
       ) : (
-        <button className="start-button" onClick={goNextPage} disabled={isLoading}>
+        <Button className="start-button" onClick={goNextPage} disabled={isLoading}>
           Start
-        </button>
+        </Button>
       )}
     </div>
   )

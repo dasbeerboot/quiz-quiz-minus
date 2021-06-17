@@ -5,7 +5,6 @@ interface ResultPageIProps {
 }
 
 function ResultPage({ result }: ResultPageIProps): JSX.Element {
-  console.log(result)
   const numberOfCorrectAnswers = result.filter((item) => item === true).length
   const numberOfWrongAnswers = result.filter((item) => item === false).length
   return (
