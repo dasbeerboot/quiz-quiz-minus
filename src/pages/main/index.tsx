@@ -20,6 +20,7 @@ function MainPage(): JSX.Element {
   const [isOnResultPage, setIsOnResultPage] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
 
+  const [userName, setuserName] = useState('')
   const [quiz, setQuiz] = useState<IQuiz>()
   const [quizIndex, setQuizIndex] = useState(0)
   const [result, setResult] = useState<boolean[]>([])
@@ -88,6 +89,8 @@ function MainPage(): JSX.Element {
     }
   }, [match])
 
+  console.log(userName)
+
   return (
     <div className="main-page-container">
       <Backdrop open={isLoading} onClick={() => console.log('loading')}>
@@ -106,9 +109,16 @@ function MainPage(): JSX.Element {
           isLoading={isLoading}
         />
       ) : (
-        <Button className="start-button" onClick={goNextPage} disabled={isLoading}>
-          Start
-        </Button>
+        <div className="username-container">
+          <input
+            className="username-input"
+            type="text"
+            onChange={(event) => setuserName(event.target.value)}
+          />
+          <Button className="start-button" onClick={goNextPage} disabled={isLoading}>
+            Start
+          </Button>
+        </div>
       )}
     </div>
   )
