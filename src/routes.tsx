@@ -13,31 +13,11 @@ const routes: RouteConfig[] = [
         exact: true,
         component: MainPage,
       },
-      // {
-      //   path: '/first',
-      //   exact: true,
-      //   component: First,
-      // },
-      // {
-      //   path: '/second',
-      //   exact: true,
-      //   component: Second,
-      // },
-      // {
-      //   path: '/third',
-      //   exact: true,
-      //   component: Third,
-      // },
-      // {
-      //   path: '/fourth',
-      //   exact: true,
-      //   component: Fourth,
-      // },
-      // {
-      //   path: '/fifth',
-      //   exact: true,
-      //   component: Fifth,
-      // },
+      {
+        path: '/:index',
+        exact: true,
+        component: MainPage,
+      },
     ],
   },
 ]

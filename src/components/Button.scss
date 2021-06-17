@@ -1,0 +1,17 @@
+.btn {
+  width: 100px;
+  height: 32px;
+  color: #ffffff;
+  background-color: #5891f9;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  &:disabled {
+    background-color: #e4e4e4;
+    color: #646464;
+    pointer-events: none;
+  }
+  &:hover {
+    background-color: #90bbff;
+  }
+}
