@@ -1,4 +1,13 @@
 .result-container {
     width: 100%;
+    display: block;
     margin: 0 auto;
+
+    .value {
+        font-size: 1.5rem;
+        font-weight: 500;
+    }
+    .btn {
+        margin: 1rem auto;
+    }
 }
