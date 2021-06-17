@@ -6,21 +6,34 @@ import config from '../../configs/config'
 import { IQuiz } from '../../models/quiz'
 import { useHistory } from 'react-router'
 import { useRouteMatch } from 'react-router-dom'
+import ResultPage from '../result/result'
+import NicknameModal from '../../components/NicknameModal'
+import { Backdrop, CircularProgress, Dialog } from '@material-ui/core'
 
 function MainPage(): JSX.Element {
   const match = useRouteMatch<{ index: string }>()
   const history = useHistory()
-  let quizIndex = 0
+  const search = window.location.search
+  const urlParams = useMemo(() => {
+    return new URLSearchParams(search)
+  }, [search])
+  const [isOnResultPage, setIsOnResultPage] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   const [quiz, setQuiz] = useState<IQuiz>()
-  const [result, setResult] = useState({
-    first: false,
-    second: false,
-    third: false,
-    fourth: false,
-    fifth: false,
-  })
+  const [quizIndex, setQuizIndex] = useState(0)
+  const [result, setResult] = useState<boolean[]>([])
   const [correctAnswer, setCorrectAnswer] = useState('')
+  const [isSelected, setIsSelected] = useState({ selected: false, index: 0 })
+
+  // const renderLoading = useMemo(() => {
+  //   if (isLoading)
+  //     return (
+  //       <Dialog open={isLoading} onClose={() => console.log('for loading')}>
+  //         <CircularProgress />
+  //       </Dialog>
+  //     )
+  // }, [isLoading])
 
   const getQuiz = async () => {
     axios({
@@ -48,34 +61,62 @@ function MainPage(): JSX.Element {
     return answers.sort(() => Math.random() - 0.5)
   }
 
-  const handleChangeAnswer = (selectedAnswer: string) => {
-    setResult((prev) => ({
-      ...prev,
-      [match.params.index]: correctAnswer === selectedAnswer ? true : false,
-    }))
-    console.log(correctAnswer === selectedAnswer)
+  const handleChangeAnswer = (index: number, selectedAnswer: string) => {
+    console.log(index)
+    const arr = result
+    if (result === []) {
+      arr.push(correctAnswer === selectedAnswer)
+    } else {
+      arr[index] = correctAnswer === selectedAnswer
+    }
+    setResult(arr)
+  }
+
+  const goNextPage = () => {
+    if (match.params.index === '4') {
+      history.push(`${history.location.pathname}?finished=${true}`)
+    } else {
+      history.push(`/${quizIndex}`)
+    }
+    setIsLoading(true)
   }
 
   useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsLoading(false)
+    }, 1500)
+
     if (match.params.index) {
       getQuiz()
+      setQuizIndex(quizIndex + 1)
+    }
+    setIsOnResultPage(urlParams.get('finished') === 'true')
+
+    return () => {
+      clearTimeout(timeout)
     }
   }, [match])
-  console.log(quiz)
+
   return (
     <div className="main-page-container">
-      {match.params.index ? (
+      <Backdrop open={isLoading} onClick={() => console.log('loading')}>
+        <CircularProgress />
+      </Backdrop>
+      {isOnResultPage ? (
+        <ResultPage result={result} />
+      ) : match.params.index ? (
         <Quiz
           quiz={quiz}
-          onSelectAnswer={(selectedAnswer: string) => handleChangeAnswer(selectedAnswer)}
+          onSelectAnswer={(index: number, selectedAnswer: string) =>
+            handleChangeAnswer(index, selectedAnswer)
+          }
+          onGoNextPage={goNextPage}
+          isSelected={isSelected}
+          isLoading={isLoading}
         />
       ) : (
-        <button
-          onClick={() => {
-            history.push(`/${++quizIndex}`)
-          }}
-        >
-          {'>'} Start
+        <button className="start-button" onClick={goNextPage} disabled={isLoading}>
+          Start
         </button>
       )}
     </div>

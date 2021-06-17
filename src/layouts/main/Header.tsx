@@ -1,7 +1,7 @@
 import React from 'react'
 
 function Header(): JSX.Element {
-  return <header>main top bar</header>
+  return <header className="quiz-header">main top bar</header>
 }
 
 export default Header

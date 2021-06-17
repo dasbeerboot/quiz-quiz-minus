@@ -2,6 +2,7 @@ import React from 'react'
 import { RouteConfig } from 'react-router-config'
 import MainLayout from './layouts/main/index'
 import MainPage from './pages/main/index'
+import ResultPage from './pages/result/result'
 
 const routes: RouteConfig[] = [
   {
