@@ -30,7 +30,6 @@ function ResultPage({ result,startTime }: ResultPageIProps): JSX.Element {
       <span className="value">
       {numberOfCorrectAnswers}</span>개, 틀린 문제는 <span className="value">{5 - numberOfCorrectAnswers}</span>개 입니다.</div>
       
-
       {
         numberOfCorrectAnswers === 5 && 
         <div className="show-me-the-money">
