@@ -1,0 +1,18 @@
+.quiz-container {
+    position: relative;
+    display: flex;
+    width: 70%;
+    height: 50%;
+    flex-direction: column;
+    align-content: center;
+    margin: auto;
+    .quiz-content {
+        align-items: center;
+
+    }
+    .btn {
+        position: absolute;
+        right: 0;
+        bottom: 20%;
+    }
+}

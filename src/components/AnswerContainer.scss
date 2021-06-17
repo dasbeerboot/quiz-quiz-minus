@@ -1,0 +1,18 @@
+.answer-container {
+    width: 100%;
+    margin: 0 auto;
+
+
+    .answer-list {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .item {
+            cursor: pointer;
+            &.selected{
+                    background-color: #90bbff33;
+            }
+        }
+    }
+}

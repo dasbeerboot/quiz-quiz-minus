@@ -1,6 +1,7 @@
 import React from 'react'
 import { useRouteMatch } from 'react-router-dom'
 import clsx from 'clsx'
+import './AnswerContainer.scss'
 
 export interface AnswerContainerIProps {
   answers: string[]
@@ -19,11 +20,11 @@ function AnswerContainer({
         {answers.map((item, idx) => (
           <li
             className={clsx(
-              'answer-item',
-              isSelected.selected && isSelected.index === idx && 'selected',
+              'item',
+              (isSelected.selected && isSelected.index === idx) ? 'selected' : '',
             )}
             key={idx}
-            onClick={() => onChangeAnswer(parseInt(match.params.index), item)}
+            onClick={() => onChangeAnswer(idx, item)}
             dangerouslySetInnerHTML={{ __html: item }}
           ></li>
         ))}

@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { IQuiz } from '../../models/quiz'
 import AnswerContainer from '../../components/AnswerContainer'
 import { useRouteMatch } from 'react-router-dom'
 import Button from '../../components/Button'
+import './Quiz.scss'
 
 export interface QuizIProps {
   quiz: IQuiz | undefined
@@ -35,10 +36,10 @@ function Quiz({
           isSelected={isSelected}
           onChangeAnswer={(index: number, answer: string) => onSelectAnswer(index, answer)}
         />
-        <Button onClick={onGoNextPage} disabled={isLoading}>
+      </div>
+        <Button onClick={onGoNextPage} disabled={isLoading || !isSelected.selected}>
           {match.params.index !== '4' ? 'next' : 'view result'}
         </Button>
-      </div>
     </article>
   )
 }

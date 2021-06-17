@@ -9,6 +9,7 @@ import { useRouteMatch } from 'react-router-dom'
 import { Backdrop, CircularProgress } from '@material-ui/core'
 import ResultPage from '../result/Result'
 import Button from '../../components/Button'
+import moment from 'moment'
 
 function MainPage(): JSX.Element {
   const match = useRouteMatch<{ index: string }>()
@@ -17,17 +18,19 @@ function MainPage(): JSX.Element {
   const urlParams = useMemo(() => {
     return new URLSearchParams(search)
   }, [search])
+
+  const startTime = moment()
+
   const [isOnResultPage, setIsOnResultPage] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
 
-  const [userName, setuserName] = useState('')
-  const [quiz, setQuiz] = useState<IQuiz>()
   const [quizIndex, setQuizIndex] = useState(0)
+  const [quiz, setQuiz] = useState<IQuiz>()
   const [result, setResult] = useState<boolean[]>([])
   const [correctAnswer, setCorrectAnswer] = useState('')
   const [isSelected, setIsSelected] = useState({ selected: false, index: 0 })
 
-  const getQuiz = async () => {
+  const getQuiz = () => {
     axios({
       method: 'get',
       url: config.url,
@@ -78,18 +81,16 @@ function MainPage(): JSX.Element {
       setIsLoading(false)
     }, 1500)
 
+    setIsSelected({selected: false, index: 0})
     if (match.params.index) {
       getQuiz()
       setQuizIndex(quizIndex + 1)
     }
     setIsOnResultPage(urlParams.get('finished') === 'true')
-
     return () => {
       clearTimeout(timeout)
     }
   }, [match])
-
-  console.log(userName)
 
   return (
     <div className="main-page-container">
@@ -97,7 +98,7 @@ function MainPage(): JSX.Element {
         <CircularProgress />
       </Backdrop>
       {isOnResultPage ? (
-        <ResultPage result={result} />
+        <ResultPage result={result} startTime={startTime} />
       ) : match.params.index ? (
         <Quiz
           quiz={quiz}
@@ -110,14 +111,13 @@ function MainPage(): JSX.Element {
         />
       ) : (
         <div className="username-container">
-          <input
-            className="username-input"
-            type="text"
-            onChange={(event) => setuserName(event.target.value)}
-          />
+          <div className="intro">
+            다섯개의 랜덤 퀴즈를 풀어보세요.<br />
+            아래의 '퀴즈 풀기' 버튼을 누르면 퀴즈가 시작됩니다.
           <Button className="start-button" onClick={goNextPage} disabled={isLoading}>
-            Start
+            퀴즈 풀기
           </Button>
+          </div>
         </div>
       )}
     </div>
