@@ -71,7 +71,7 @@ function MainPage(): JSX.Element {
 
   const goNextPage = () => {
     if (match.params.index === '4') {
-      history.push(`quiz-quiz-minus${history.location.pathname}?finished=${true}`)
+      history.push(`${history.location.pathname}?finished=${true}`)
     } else {
       history.push(`/quiz-quiz-minus/${quizIndex}`)
     }
