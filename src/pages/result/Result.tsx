@@ -37,7 +37,7 @@ function ResultPage({ result,startTime }: ResultPageIProps): JSX.Element {
           당신의 손에 쥐어지는 합격목걸이
         </div>
       }
-      <Button onClick={() => history.push('/')}>재도전!</Button>
+      <Button onClick={() => history.push('/quiz-quiz-minus')}>재도전!</Button>
     </article>
   )
 }
