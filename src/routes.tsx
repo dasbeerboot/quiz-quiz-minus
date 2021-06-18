@@ -8,12 +8,12 @@ const routes: RouteConfig[] = [
     component: MainLayout,
     routes: [
       {
-        path: '/',
+        path: '/quiz-quiz-minus',
         exact: true,
         component: MainPage,
       },
       {
-        path: '/:index',
+        path: '/quiz-quiz-minus/:index',
         exact: true,
         component: MainPage,
       },
