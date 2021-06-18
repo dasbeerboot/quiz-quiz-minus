@@ -9,7 +9,6 @@ const routes: RouteConfig[] = [
     routes: [
       {
         path: '/',
-        exact: true,
         component: MainPage,
       },
       {

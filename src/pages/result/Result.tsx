@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import moment from 'moment'
 import './Result.scss'
 import Button from '../../components/Button'
@@ -12,8 +12,8 @@ interface ResultPageIProps {
 function ResultPage({ result,startTime }: ResultPageIProps): JSX.Element {
   const history = useHistory()
   const currentTime = moment()
-  const min = moment.duration(currentTime.diff(startTime)).asMinutes().toFixed(0)
-  const sec = moment.duration(currentTime.diff(startTime)).asSeconds().toFixed(0)
+  const [duration, setDuration] = useState({min: moment.duration(currentTime.diff(startTime)).asMinutes().toFixed(0), sec: moment.duration(currentTime.diff(startTime)).asSeconds().toFixed(0)})
+
 
   const numberOfCorrectAnswers = result.filter((item) => item === true).length
   return (
@@ -25,7 +25,7 @@ function ResultPage({ result,startTime }: ResultPageIProps): JSX.Element {
         당신의 점수는 <span className="value">{numberOfCorrectAnswers * 20}</span>({numberOfCorrectAnswers}/5) 점이며
       </div>
       <div className="duration">
-        총 소요시간은 <span className="value">{min}</span>분 <span className="value">{sec}</span>초, 
+        총 소요시간은 <span className="value">{duration.min}</span>분 <span className="value">{duration.sec}</span>초, 
       </div>
       <div className="answers">맞은 문제는  
       <span className="value">
