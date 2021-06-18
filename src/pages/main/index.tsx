@@ -10,6 +10,7 @@ import { Backdrop, CircularProgress } from '@material-ui/core'
 import ResultPage from '../result/Result'
 import Button from '../../components/Button'
 import moment from 'moment'
+import Intro from '../intro/Intro'
 
 function MainPage(): JSX.Element {
   const match = useRouteMatch<{ index: string }>()
@@ -19,7 +20,8 @@ function MainPage(): JSX.Element {
     return new URLSearchParams(search)
   }, [search])
 
-  const startTime = moment()
+
+  const [startTime, setStartTime] = useState(moment())
 
   const [isOnResultPage, setIsOnResultPage] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
@@ -110,15 +112,7 @@ function MainPage(): JSX.Element {
           isLoading={isLoading}
         />
       ) : (
-        <div className="username-container">
-          <div className="intro">
-            다섯개의 랜덤 퀴즈를 풀어보세요.<br />
-            아래의 '퀴즈 풀기' 버튼을 누르면 퀴즈가 시작됩니다.
-          <Button className="start-button" onClick={goNextPage} disabled={isLoading}>
-            퀴즈 풀기
-          </Button>
-          </div>
-        </div>
+        <Intro goNextPage={goNextPage} isLoading={isLoading}/>
       )}
     </div>
   )
