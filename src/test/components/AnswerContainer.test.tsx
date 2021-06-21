@@ -20,10 +20,6 @@ afterEach(() => {
 describe('<AnswerContainer />', () => {
     const isSelected = {selected: true, index: 2}
 
-    const handleChangeAnswer = (index: number, answer: string) => {
-        console.log("onChangeAnswer")
-    }
-
     const sampleAnswerContainerProps: AnswerContainerIProps = {
         answers: ['one', 'two', 'three', 'four'],
         isSelected: isSelected,
