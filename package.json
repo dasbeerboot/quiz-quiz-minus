@@ -22,7 +22,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "deploy": "npm run deploy",
-    "test": "react-scripts test",
+    "test": "react-scripts test --transformIgnorePatterns 'node_modules/'",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
