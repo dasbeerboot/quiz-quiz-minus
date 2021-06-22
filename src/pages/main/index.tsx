@@ -8,7 +8,6 @@ import { useHistory } from 'react-router'
 import { useRouteMatch } from 'react-router-dom'
 import { Backdrop, CircularProgress } from '@material-ui/core'
 import ResultPage from '../result/Result'
-import Button from '../../components/Button'
 import moment from 'moment'
 import Intro from '../intro/Intro'
 
@@ -19,7 +18,6 @@ function MainPage(): JSX.Element {
   const urlParams = useMemo(() => {
     return new URLSearchParams(search)
   }, [search])
-
 
   const [startTime, setStartTime] = useState(moment())
 
@@ -83,7 +81,7 @@ function MainPage(): JSX.Element {
       setIsLoading(false)
     }, 1500)
 
-    setIsSelected({selected: false, index: 0})
+    setIsSelected({ selected: false, index: 0 })
     if (match.params.index) {
       getQuiz()
       setQuizIndex(quizIndex + 1)
@@ -112,7 +110,7 @@ function MainPage(): JSX.Element {
           isLoading={isLoading}
         />
       ) : (
-        <Intro goNextPage={goNextPage} isLoading={isLoading}/>
+        <Intro goNextPage={goNextPage} isLoading={isLoading} />
       )}
     </div>
   )

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import { IQuiz } from '../../models/quiz'
 import AnswerContainer from '../../components/AnswerContainer'
 import { useRouteMatch } from 'react-router-dom'
@@ -37,9 +37,9 @@ function Quiz({
           onChangeAnswer={(index: number, answer: string) => onSelectAnswer(index, answer)}
         />
       </div>
-        <Button onClick={onGoNextPage} disabled={isLoading || !isSelected.selected}>
-          {match.params.index !== '4' ? 'next' : 'view result'}
-        </Button>
+      <Button onClick={onGoNextPage} disabled={isLoading || !isSelected.selected}>
+        {match.params.index !== '4' ? 'next' : 'view result'}
+      </Button>
     </article>
   )
 }
