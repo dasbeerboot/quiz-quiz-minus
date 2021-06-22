@@ -1,18 +1,27 @@
 .quiz-container {
-    position: relative;
-    display: flex;
-    width: 70%;
-    height: 100%;
-    flex-direction: column;
-    justify-content: center;
-    margin: auto;
-    .quiz-content {
-        align-items: center;
+  position: relative;
+  display: flex;
+  width: 70%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  .quiz-content {
+    align-items: center;
+  }
+  .btn {
+    position: absolute;
+    right: 0;
+    bottom: 20%;
+  }
+}
 
-    }
+@media screen and (max-width: 450px) {
+  .quiz-container {
+    width: 100%;
+
     .btn {
-        position: absolute;
-        right: 0;
-        bottom: 20%;
+      bottom: 10%;
     }
+  }
 }
