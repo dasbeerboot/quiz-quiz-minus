@@ -13,7 +13,6 @@ function AnswerContainer({
   isSelected,
   onChangeAnswer,
 }: AnswerContainerIProps): JSX.Element {
-  const match = useRouteMatch<{ index: string }>()
   return (
     <section className="answer-container">
       <ol className="answer-list">
@@ -21,7 +20,7 @@ function AnswerContainer({
           <li
             className={clsx(
               'item',
-              (isSelected.selected && isSelected.index === idx) ? 'selected' : '',
+              isSelected.selected && isSelected.index === idx ? 'selected' : '',
             )}
             key={idx}
             onClick={() => onChangeAnswer(idx, item)}
