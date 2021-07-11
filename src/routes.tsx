@@ -1,24 +1,24 @@
-import { RouteConfig } from 'react-router-config'
-import MainLayout from './layouts/main/index'
-import MainPage from './pages/main/index'
+import { RouteConfig } from "react-router-config";
+import MainLayout from "./layouts/main/index";
+import MainPage from "./pages/main/index";
 
 const routes: RouteConfig[] = [
   {
-    route: '*',
+    route: "*",
     component: MainLayout,
     routes: [
       {
-        path: '/quiz-quiz-minus',
+        path: "/",
         exact: true,
-        component: MainPage,
+        component: MainPage
       },
       {
-        path: '/quiz-quiz-minus/:index',
+        path: "/:index",
         exact: true,
-        component: MainPage,
-      },
-    ],
-  },
-]
+        component: MainPage
+      }
+    ]
+  }
+];
 
-export default routes
+export default routes;
